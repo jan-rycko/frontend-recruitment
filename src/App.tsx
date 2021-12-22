@@ -9,7 +9,7 @@ import { useState } from "react";
 type stateType = "async" | "async-state" | "props" | "hooks" | "redux";
 
 export default function App() {
-  const [state] = useState<stateType>("redux");
+  const [state] = useState<stateType>("async");
 
   return (
     <div
