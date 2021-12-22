@@ -1,6 +1,6 @@
 import { createStore, combineReducers } from "redux";
-import { connect, Provider, ConnectedComponent } from "react-redux";
-import { ComponentType, FC, ReactElement, useEffect } from "react";
+import { connect, Provider } from "react-redux";
+import { FC, useEffect } from "react";
 
 const firstAction = { type: "FIRST_ACTION", data: 42 };
 
@@ -34,8 +34,6 @@ const mapStateToProps = (state: IStoreState): IState => ({
 });
 
 const ReduxChild: FC<IState> = ({ answer }) => {
-  console.log(answer);
-
   useEffect(() => {
     store.dispatch(firstAction);
   }, []);

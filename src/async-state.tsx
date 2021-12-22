@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState, FC, Dispatch, SetStateAction } from "react";
-import { Post, Comment } from "./model";
+import { Post, Comment } from "./typescript";
 
 export const Child: FC<{
   id: number;

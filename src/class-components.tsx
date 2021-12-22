@@ -1,5 +1,5 @@
 import { Component, PureComponent } from "react";
-import { IExampleProps } from "./model";
+import { IExampleProps } from "./typescript";
 
 // Jaka jest różnica pomiędzy poniższymi komponentami
 class Example1 extends PureComponent<IExampleProps> {
