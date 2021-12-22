@@ -1,48 +1,58 @@
-// import { createStore, combineReducers } from "redux";
-// import { connect, Provider, ConnectedComponent } from "react-redux";
-// import { ComponentType, FC, ReactElement } from "react";
+import { createStore, combineReducers } from "redux";
+import { connect, Provider, ConnectedComponent } from "react-redux";
+import { ComponentType, FC, ReactElement, useEffect } from "react";
 
-// const firstAction = { type: "FIRST_ACTION", data: 42 };
+const firstAction = { type: "FIRST_ACTION", data: 42 };
 
-// interface IState {
-//   answer: number | null;
-// }
+interface IState {
+  answer: number | null;
+}
 
-// const questionReducer = (
-//   state: IState = { answer: null },
-//   action: typeof firstAction
-// ): IState => {
-//   switch (action.type) {
-//     case "FIRST_ACTION":
-//       return { ...state, answer: action.data };
-//   }
+const questionReducer = (
+  state: IState = { answer: null },
+  action: typeof firstAction
+): IState => {
+  switch (action.type) {
+    case "FIRST_ACTION":
+      return { ...state, answer: action.data };
+  }
 
-//   return state;
-// };
+  return state;
+};
 
-// interface IStoreState {
-//   question: IState;
-// }
+interface IStoreState {
+  question: IState;
+}
 
-// // @ts-ignore
-// const store = createStore<IStoreState>(combineReducers({ question: questionReducer });
+// @ts-ignore
+const store = createStore<IStoreState>(
+  combineReducers({ question: questionReducer })
+);
 
-// const mapStateToProps = (state: IStoreState): IState => ({
-//   answer: state.question.answer
-// });
+const mapStateToProps = (state: IStoreState): IState => ({
+  answer: state.question.answer
+});
 
-// const ReduxChild: FC<IState> = ({ answer }) => <>{answer}</>;
+const ReduxChild: FC<IState> = ({ answer }) => {
+  console.log(answer);
 
-// const Connected = connect<IState, {}, {}, IStoreState>(mapStateToProps)(
-//   ReduxChild
-// );
+  useEffect(() => {
+    store.dispatch(firstAction);
+  }, []);
 
-// const ReduxParent = () => {
-//   return (
-//     <Provider store={store}>
-//       <Connected />
-//     </Provider>
-//   );
-// };
+  return <>Answer is: {answer}</>;
+};
 
-// export default ReduxParent;
+const Connected = connect<IState, {}, {}, IStoreState>(mapStateToProps)(
+  ReduxChild
+);
+
+const ReduxParent = () => {
+  return (
+    <Provider store={store}>
+      <Connected />
+    </Provider>
+  );
+};
+
+export default ReduxParent;
